@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f3e9">
+<title>HAVE — 우리 아이의 건강을 담다</title>
+<meta name="description" content="진료 기록부터 투약 일정까지, 소중한 반려동물의 건강정보를 HAVE에 담아 관리하세요.">
+<style>
+:root{--cream:#f6f3e9;--paper:#fffdf8;--sage:#788b70;--sage-dark:#435944;--sage-light:#e3eadf;--ink:#252b25;--muted:#72776f;--line:#e7e5da;--peach:#f2d9c7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;letter-spacing:-.025em}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(1160px,calc(100% - 48px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(246,243,233,.86);backdrop-filter:blur(16px);border-bottom:1px solid rgba(67,89,68,.08)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-size:23px;font-weight:850;letter-spacing:.08em}
+.logo-mark{width:34px;height:34px;border-radius:12px;background:var(--sage-dark);color:white;display:grid;place-items:center;font-size:16px}
+.navlinks{display:flex;align-items:center;gap:30px;font-size:14px;color:#626a60}
+.navlinks a:hover{color:var(--sage-dark)}
+.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:100px;padding:14px 22px;background:var(--sage-dark);color:#fff;font-weight:650;font-size:14px;transition:.2s}
+.nav-cta:hover,.btn:hover{transform:translateY(-2px);background:#344a36}
+.menu-btn{display:none;border:0;background:transparent;font-size:24px;color:var(--ink)}
+.hero{padding:88px 0 70px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;align-items:center;gap:50px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--sage-dark);font-size:12px;font-weight:750;letter-spacing:.15em;text-transform:uppercase}
+.eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#a6b99c}
+h1{font-size:clamp(42px,5.7vw,72px);line-height:1.12;letter-spacing:-.065em;margin:22px 0}
+h1 em{font-style:normal;color:var(--sage)}
+.hero-copy{max-width:480px;color:var(--muted);font-size:17px;line-height:1.8}
+.hero-actions{display:flex;gap:12px;align-items:center;margin-top:30px;flex-wrap:wrap}
+.btn.secondary{background:transparent;color:var(--sage-dark);border:1px solid #c9d1c4}
+.btn.secondary:hover{background:var(--sage-light)}
+.hero-note{font-size:12px;color:#8a8e84;margin-top:18px}
+.hero-art{position:relative;min-height:480px;display:grid;place-items:center}
+.art-blob{position:absolute;width:440px;height:440px;max-width:100%;border-radius:48% 52% 61% 39% / 47% 42% 58% 53%;background:#e6eadf;transform:rotate(-9deg)}
+.dog-illustration{position:relative;width:min(390px,100%);filter:drop-shadow(0 22px 25px rgba(65,77,56,.10))}
+.floating{position:absolute;background:var(--paper);border:1px solid rgba(67,89,68,.09);box-shadow:0 16px 35px rgba(65,77,56,.09);border-radius:18px;padding:15px 17px}
+.float-top{top:45px;right:0}
+.float-bottom{bottom:32px;left:2px}
+.float-title{font-size:11px;color:var(--muted);margin-bottom:7px}
+.float-main{font-size:15px;font-weight:750}
+.float-pill{display:inline-block;margin-top:8px;border-radius:20px;padding:5px 9px;background:#e5efdf;color:#4c6b48;font-size:10px;font-weight:700}
+.section{padding:100px 0}
+.section-head{text-align:center;max-width:660px;margin:0 auto 50px}
+.section-head h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.055em;line-height:1.2;margin:15px 0}
+.section-head p{font-size:16px;color:var(--muted);line-height:1.75}
+.problem{background:var(--paper)}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.problem-card{padding:28px;border:1px solid var(--line);border-radius:22px;background:#fff}
+.problem-icon{font-size:26px;width:54px;height:54px;display:grid;place-items:center;background:var(--cream);border-radius:17px;margin-bottom:22px}
+.problem-card h3{font-size:18px;margin:0 0 10px}
+.problem-card p{font-size:14px;color:var(--muted);line-height:1.7;margin:0}
+.solution{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.solution-copy h2{font-size:clamp(32px,4.3vw,52px);line-height:1.18;letter-spacing:-.06em;margin:18px 0}
+.solution-copy p{font-size:16px;color:var(--muted);line-height:1.8}
+.solution-highlight{margin-top:25px;padding:18px 20px;border-left:3px solid var(--sage);background:#e9eee4;color:var(--sage-dark);font-weight:650;line-height:1.6;border-radius:0 14px 14px 0}
+.dashboard{background:var(--paper);border:1px solid #e8e7df;border-radius:26px;padding:24px;box-shadow:0 20px 55px rgba(60,70,52,.07);transform:rotate(1.5deg)}
+.dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.dash-title{font-size:17px;font-weight:800}
+.dash-date{font-size:11px;color:var(--muted)}
+.pet-row{display:flex;align-items:center;gap:13px;padding:14px;background:var(--cream);border-radius:16px}
+.pet-avatar{width:54px;height:54px;background:#e7cdb8;border-radius:18px;display:grid;place-items:center;font-size:28px}
+.pet-name{font-weight:750}
+.pet-sub{font-size:11px;color:var(--muted);margin-top:4px}
+.dash-section-title{font-size:13px;font-weight:750;margin:22px 0 12px}
+.med-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line)}
+.med-row:last-child{border-bottom:0}
+.med-left{display:flex;align-items:center;gap:10px}
+.med-icon{width:34px;height:34px;border-radius:12px;background:#e5efdf;display:grid;place-items:center}
+.med-name{font-size:12px;font-weight:700}
+.med-time{font-size:10px;color:var(--muted);margin-top:3px}
+.status{font-size:10px;color:#4e704a;background:#e4efdf;padding:6px 9px;border-radius:20px}
+.features{background:var(--sage-dark);color:#fff}
+.features .section-head .eyebrow{color:#d6e4ce}
+.features .section-head .eyebrow:before{background:#d6e4ce}
+.features .section-head p{color:#d0d8cd}
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.feature-card{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);border-radius:22px;padding:25px 22px;transition:.25s}
+.feature-card:hover{background:rgba(255,255,255,.13);transform:translateY(-4px)}
+.feature-number{font-size:11px;color:#c8d8c0;letter-spacing:.12em}
+.feature-icon{font-size:26px;margin:24px 0}
+.feature-card h3{font-size:17px;margin:0 0 10px}
+.feature-card p{font-size:13px;color:#d1d9ce;line-height:1.7;margin:0}
+.brand{padding:100px 0;text-align:center}
+.brand-quote{font-size:clamp(30px,5vw,58px);line-height:1.25;letter-spacing:-.06em;font-weight:800;margin:22px auto;max-width:780px}
+.brand-quote span{color:var(--sage)}
+.brand p{color:var(--muted);font-size:16px;line-height:1.8;max-width:550px;margin:0 auto}
+.brand-word{font-size:18px;font-weight:850;letter-spacing:.18em;margin-top:38px;color:var(--sage-dark)}
+.final-cta{background:var(--sage-light);border-radius:30px;padding:60px 28px;text-align:center;margin-bottom:80px}
+.final-cta h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.05em;margin:0 0 15px}
+.final-cta p{color:#687465;line-height:1.7;margin:0 0 26px}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:12px}
+.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}
+footer .logo{font-size:18px;color:var(--ink)}
+footer .logo-mark{width:28px;height:28px;font-size:13px;border-radius:9px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:850px){
+ .hero-grid,.solution{grid-template-columns:1fr;gap:30px}
+ .hero{padding:58px 0 30px}
+ .hero-art{min-height:390px}
+ .art-blob{width:340px;height:340px}
+ .dog-illustration{width:310px}
+ .float-top{right:0;top:15px}.float-bottom{bottom:5px}
+ .problem-grid{grid-template-columns:1fr}
+ .feature-grid{grid-template-columns:repeat(2,1fr)}
+ .section{padding:75px 0}
+ .solution{gap:38px}
+}
+@media(max-width:600px){
+ .wrap{width:min(100% - 32px,1160px)}
+ .nav{height:65px}
+ .navlinks{display:none;position:absolute;left:16px;right:16px;top:64px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;flex-direction:column;gap:18px;align-items:stretch}
+ .navlinks.open{display:flex}
+ .nav-cta{display:none}
+ .menu-btn{display:block;cursor:pointer}
+ h1{font-size:44px}
+ .hero-copy{font-size:15px}
+ .hero-art{min-height:340px}
+ .art-blob{width:300px;height:300px}
+ .dog-illustration{width:280px}
+ .floating{padding:12px 14px}
+ .float-top{right:0}.float-bottom{left:0}
+ .feature-grid{grid-template-columns:1fr}
+ .feature-card{padding:22px}
+ .brand{padding:75px 0}
+ .final-cta{padding:45px 22px;margin-bottom:55px}
+ .footer-row{align-items:flex-start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="HAVE 홈"><span class="logo-mark">H</span> HAVE</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#about">HAVE 소개</a><a href="#features">주요 기능</a><a href="#brand">브랜드 이야기</a>
+    </nav>
+    <a class="nav-cta" href="https://have-ai-one.vercel.app" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+    <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기">☰</button>
+  </div>
+</header>
+<main id="top">
+<section class="hero">
+ <div class="wrap hero-grid">
+  <div class="reveal">
+   <div class="eyebrow">Pet health, in one place</div>
+   <h1>병원에서 끝나지 않는<br><em>우리 아이의 건강관리.</em></h1>
+   <p class="hero-copy">진료 기록부터 투약 일정까지.<br>소중한 반려동물의 건강정보를 HAVE에 담아 관리하세요.</p>
+   <div class="hero-actions"><a class="btn" href="https://have-ai-one.vercel.app" target="_blank" rel="noopener">HAVE 시작하기 ↗</a><a class="btn secondary" href="#features">서비스 알아보기</a></div>
+   <div class="hero-note">반려동물의 일상적인 건강관리를 더 쉽고 꼼꼼하게.</div>
+  </div>
+  <div class="hero-art reveal">
+   <div class="art-blob"></div>
+   <svg class="dog-illustration" viewBox="0 0 420 390" role="img" aria-label="따뜻한 색감의 반려동물 일러스트">
+    <ellipse cx="214" cy="342" rx="128" ry="24" fill="#cbd5c2" opacity=".45"/>
+    <path d="M118 170 Q82 116 105 76 Q138 52 164 112 L248 106 Q281 57 314 80 Q343 120 307 177 L300 253 Q290 307 211 312 Q137 310 121 259Z" fill="#d8b99b"/>
+    <path d="M116 154 Q83 118 108 82 Q131 66 151 111Z" fill="#8c6c55"/>
+    <path d="M306 153 Q341 119 315 84 Q291 68 272 112Z" fill="#8c6c55"/>
+    <ellipse cx="211" cy="215" rx="91" ry="91" fill="#edcfb0"/>
+    <ellipse cx="178" cy="198" rx="9" ry="12" fill="#3c4039"/><ellipse cx="244" cy="198" rx="9" ry="12" fill="#3c4039"/>
+    <ellipse cx="211" cy="232" rx="23" ry="17" fill="#785e4e"/>
+    <path d="M192 247 Q211 266 230 247" fill="none" stroke="#785e4e" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="168" cy="222" r="12" fill="#e7a9a0" opacity=".65"/><circle cx="255" cy="222" r="12" fill="#e7a9a0" opacity=".65"/>
+    <path d="M142 292 Q117 318 129 350 Q147 367 179 351 L184 307" fill="#d8b99b"/>
+    <path d="M280 292 Q306 318 294 350 Q276 367 244 351 L239 307" fill="#d8b99b"/>
+    <path d="M163 300 Q157 333 169 352 Q192 367 211 354 Q230 367 253 352 Q265 333 259 300" fill="#f4e6d4"/>
+    <path d="M177 343 Q180 361 193 361 L205 361 Q213 354 211 344 M211 344 Q210 354 218 361 L232 361 Q244 361 246 343" fill="#d8b99b"/>
+    <path d="M157 130 Q183 103 211 112 Q239 103 265 130" fill="none" stroke="#f3dfc9" stroke-width="13" stroke-linecap="round"/>
+    <path d="M190 279 Q211 289 232 279" fill="none" stroke="#b18b6d" stroke-width="4" stroke-linecap="round"/>
+   </svg>
+   <div class="floating float-top"><div class="float-title">오늘의 투약</div><div class="float-main">약속된 시간, 잊지 않도록</div><span class="float-pill">✓ 관리 중</span></div>
+   <div class="floating float-bottom"><div class="float-title">HEALTH RECORD</div><div class="float-main">건강 기록을 한곳에</div></div>
+  </div>
+ </div>
+</section>
+<section class="section problem" id="about">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">Everyday challenges</div><h2>아이의 건강을 챙기는 일,<br>생각보다 많은 것을 기억해야 합니다.</h2><p>병원에서 받은 정보부터 집에서 이어지는 관리까지.<br>보호자의 기억에만 의존하기에는 놓치기 쉬운 순간들이 있습니다.</p></div>
+  <div class="problem-grid">
+   <article class="problem-card reveal"><div class="problem-icon">💊</div><h3>헷갈리는 투약 일정</h3><p>하루 여러 번 약을 챙겨야 할 때, 투약 시간과 완료 여부를 기억하기 어렵습니다.</p></article>
+   <article class="problem-card reveal"><div class="problem-icon">📁</div><h3>흩어진 건강 기록</h3><p>병원별 진료 내용과 검사 결과, 처방 정보가 따로 보관되어 한눈에 확인하기 어렵습니다.</p></article>
+   <article class="problem-card reveal"><div class="problem-icon">🗓️</div><h3>놓치기 쉬운 건강 일정</h3><p>예방접종이나 정기검진처럼 챙겨야 할 일들이 바쁜 일상 속에서 잊히곤 합니다.</p></article>
+  </div>
+ </div>
+</section>
+<section class="section">
+ <div class="wrap solution">
+  <div class="solution-copy reveal"><div class="eyebrow">One place for care</div><h2>흩어져 있던 건강정보를<br><em style="color:var(--sage)">하나의 흐름으로.</em></h2><p>HAVE는 반려동물의 진료 이후에도 이어지는 건강관리를 돕기 위해, 투약 정보와 건강 기록, 주요 일정을 한곳에서 정리할 수 있도록 구성했습니다.</p><div class="solution-highlight">병원에서의 진료가 끝나도, 우리 아이를 위한 care는 계속되니까.</div></div>
+  <div class="dashboard reveal">
+   <div class="dash-head"><div class="dash-title">HAVE 건강관리</div><div class="dash-date">TODAY · 11.20</div></div>
+   <div class="pet-row"><div class="pet-avatar">🐱</div><div><div class="pet-name">우리 아이</div><div class="pet-sub">건강정보를 한눈에 확인해요</div></div></div>
+   <div class="dash-section-title">오늘의 투약 일정</div>
+   <div class="med-row"><div class="med-left"><div class="med-icon">💊</div><div><div class="med-name">아침 약</div><div class="med-time">오전 9:00</div></div></div><span class="status">완료</span></div>
+   <div class="med-row"><div class="med-left"><div class="med-icon">💧</div><div><div class="med-name">점심 약</div><div class="med-time">오후 1:00</div></div></div><span class="status" style="background:#f4e7d8;color:#9a704b">예정</span></div>
+   <div class="med-row"><div class="med-left"><div class="med-icon">🩺</div><div><div class="med-name">건강 기록</div><div class="med-time">최근 진료 내용을 확인해요</div></div></div><span class="status">보기</span></div>
+  </div>
+ </div>
+</section>
+<section class="section features" id="features">
+ <div class="wrap">
+  <div class="section-head reveal"><div class="eyebrow">HAVE features</div><h2>건강관리에 필요한 정보를<br>더 간편하게.</h2><p>매일의 관리부터 병원에서 받은 기록까지,<br>HAVE의 주요 기능을 만나보세요.</p></div>
+  <div class="feature-grid">
+   <article class="feature-card reveal"><div class="feature-number">01 / CARE</div><div class="feature-icon">💊</div><h3>투약 관리</h3><p>약 이름과 복용 시간, 투약 방법을 정리하고 완료 여부를 관리할 수 있어요.</p></article>
+   <article class="feature-card reveal"><div class="feature-number">02 / RECORD</div><div class="feature-icon">📋</div><h3>건강 기록</h3><p>진료 내역과 검사 결과, 처방 정보를 기록해 필요할 때 다시 확인할 수 있어요.</p></article>
+   <article class="feature-card reveal"><div class="feature-number">03 / SCHEDULE</div><div class="feature-icon">🗓️</div><h3>건강 일정</h3><p>예방접종과 정기적인 건강관리 일정을 정리해 꾸준히 챙길 수 있어요.</p></article>
+   <article class="feature-card reveal"><div class="feature-number">04 / MY PET</div><div class="feature-icon">🐾</div><h3>반려동물 정보</h3><p>아이의 기본 정보를 바탕으로 건강관리 내용을 모아 관리할 수 있어요.</p></article>
+  </div>
+ </div>
+</section>
+<section class="brand" id="brand">
+ <div class="wrap reveal"><div class="eyebrow">Our message</div><div class="brand-quote">병원에서의 진료가 끝나도<br><span>우리 아이를 위한 care는 계속되니까.</span></div><p>소중한 순간과 건강에 관한 기록을 잊지 않도록.<br>보호자의 마음을 담아, 더 꾸준한 건강관리를 함께합니다.</p><div class="brand-word">HAVE · 아이의 건강을 담다</div></div>
+</section>
+<section class="wrap">
+ <div class="final-cta reveal"><h2>더 꼼꼼한 건강관리,<br>HAVE와 함께.</h2><p>우리 아이의 건강정보를 한곳에서 관리해 보세요.</p><a class="btn" href="https://have-ai-one.vercel.app" target="_blank" rel="noopener">HAVE 서비스 둘러보기 ↗</a></div>
+</section>
+</main>
+<footer><div class="wrap footer-row"><div class="logo"><span class="logo-mark">H</span> HAVE</div><div>Care beyond the clinic. · 반려동물 건강관리 플랫폼</div><div>© HAVE</div></div></footer>
+<script>
+const menuBtn=document.getElementById('menuBtn');
+const nav=document.getElementById('navlinks');
+menuBtn.addEventListener('click',()=>{nav.classList.toggle('open');menuBtn.textContent=nav.classList.contains('open')?'✕':'☰'});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.textContent='☰'}));
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
